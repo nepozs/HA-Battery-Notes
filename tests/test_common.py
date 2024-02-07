@@ -9,6 +9,12 @@ from custom_components.battery_notes.common import isfloat
 pytest_plugins = "pytest_homeassistant_custom_component"
 
 
-# This fixture checks isfloat when not valid.
 def test_isfloat():
+    """Test isfloat."""
+
+    x = None
+    assert isfloat(x) == False
     assert isfloat("A") == False
+    assert isfloat(1) == True
+    assert isfloat(1.1) == True
+
