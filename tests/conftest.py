@@ -18,6 +18,18 @@ from unittest.mock import patch
 
 import pytest
 
+from homeassistant import loader
+from homeassistant.const import CONF_ENTITY_ID
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.area_registry import AreaRegistry
+from homeassistant.helpers.device_registry import DeviceEntry, DeviceRegistry
+from homeassistant.helpers.entity_registry import EntityRegistry, RegistryEntry
+from pytest_homeassistant_custom_component.common import (
+    MockConfigEntry,
+    mock_device_registry,
+    mock_registry,
+)
+
 pytest_plugins = "pytest_homeassistant_custom_component"
 
 
@@ -62,3 +74,14 @@ pytest_plugins = "pytest_homeassistant_custom_component"
 #         side_effect=Exception,
 #     ):
 #         yield
+
+@pytest.fixture
+def device_reg(hass: HomeAssistant) -> DeviceRegistry:
+    """Return an empty, loaded, registry."""
+    return mock_device_registry(hass)
+
+
+@pytest.fixture
+def entity_reg(hass: HomeAssistant) -> EntityRegistry:
+    """Return an empty, loaded, registry."""
+    return mock_registry(hass)
